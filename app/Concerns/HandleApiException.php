@@ -45,7 +45,7 @@ trait HandleApiException
             $responseData['message'] = empty($message) ? "Resource not found" : $message;
             $responseData["statusCode"] = 404;
         } elseif ($exception instanceof MethodNotAllowedHttpException) {
-            $responseData['message'] = $message;
+            $responseData['message'] = empty($message) ? "Request method not allowed" : $message;
             $responseData['statusCode'] = 405;
         } elseif ($exception instanceof ModelNotFoundException) {
             $responseData['message'] = "Resource not found";
