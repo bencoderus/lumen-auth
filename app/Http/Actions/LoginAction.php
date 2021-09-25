@@ -4,13 +4,14 @@ namespace App\Http\Actions;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class LoginAction
 {
     public function execute(Request $request): array
     {
         if (!$token = Auth::attempt($request->input())) {
-            abort(400, 'Invalid credentials');
+            throw new HttpException(401, 'Invalid credentials');
         }
 
         return $this->formatToken($token);
