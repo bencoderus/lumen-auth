@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json(['status' => true, 'message' => 'Authy API version 1.0']);
 });
 
 $router->post('/auth/login', 'AuthController@login');
