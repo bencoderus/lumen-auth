@@ -27,3 +27,6 @@ $router->post('/auth/check-email', 'AuthController@checkEmail');
 $router->group(['middleware' => 'auth'], function ($router) {
     $router->get('/user', 'UserController@profile');
 });
+
+$router->get('/dummy-data', 'DummyController@getDummyData');
+$router->post('/dummy-data/refresh', 'DummyController@refresh');
