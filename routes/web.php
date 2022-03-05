@@ -20,8 +20,8 @@ $router->get('/', function () use ($router) {
     return response()->json(['status' => true, 'message' => 'Authy API version 1.0']);
 });
 
-// $router->post('/dummy-data', 'DummyController@getDummyData');
-// $router->post('/dummy-data/refresh', 'DummyController@refresh');
+$router->post('/dummy-data', 'DummyController@getDummyData');
+$router->post('/dummy-data/refresh', 'DummyController@refresh');
 
 $router->post('/auth/login', 'AuthController@login');
 $router->post('/auth/register', 'AuthController@register');
