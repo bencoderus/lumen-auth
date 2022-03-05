@@ -21,6 +21,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/dummy-data', 'DummyController@getDummyData');
+$router->post('/dummy-data/restructured', 'DummyController@getNewDummyData');
 $router->post('/dummy-data/refresh', 'DummyController@refresh');
 
 $router->post('/auth/login', 'AuthController@login');

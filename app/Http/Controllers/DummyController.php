@@ -18,8 +18,20 @@ class DummyController extends Controller
 
     public function getDummyData(Request $request)
     {
-        $data = $this->getData();
+        $data = $this->filterData($this->getData(), $request);
 
+        return $this->okResponse("Data retrieved successfully", $data);
+    }
+
+    public function getNewDummyData(Request $request)
+    {
+        $data = $this->filterData($this->getData(), $request);
+
+        return response()->json($data);
+    }
+
+    private function filterData(Collection $data, Request $request): Collection
+    {
         if ($search = $request->search) {
             $data = $this->search($data, $search);
         }
@@ -38,7 +50,7 @@ class DummyController extends Controller
             $data = $this->filerByType($data, $type);
         }
 
-        return $this->okResponse("Data retrieved successfully", $data);
+        return $data;
     }
 
     private function filerByType(Collection $data, string $type)
