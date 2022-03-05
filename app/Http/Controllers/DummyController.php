@@ -34,10 +34,6 @@ class DummyController extends Controller
 
         $type = Str::lower($request->type);
 
-        if ($request->has('type') && !in_array($type, self::TRANSACTION_TYPES)) {
-            return $this->badRequestResponse('Invalid transaction type');
-        }
-
         if ($request->has('type') && in_array($type, self::TRANSACTION_TYPES)) {
             $data = $this->filerByType($data, $type);
         }
