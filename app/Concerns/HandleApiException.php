@@ -2,14 +2,15 @@
 
 namespace App\Concerns;
 
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Arr;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Illuminate\Support\Arr;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 trait HandleApiException
 {
@@ -45,6 +46,7 @@ trait HandleApiException
             $responseData['message'] = empty($message) ? "Resource not found" : $message;
             $responseData["statusCode"] = 404;
         } elseif ($exception instanceof MethodNotAllowedHttpException) {
+            Cache::flush();
             dd(request()->method(), $exception);
             $responseData['message'] = empty($message) ? "Request method not allowed" : $message;
             $responseData['statusCode'] = 405;
