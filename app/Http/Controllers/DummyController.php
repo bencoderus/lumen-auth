@@ -132,7 +132,7 @@ class DummyController extends Controller
 
             $generated = [
                 'id' => $id,
-                'timestamp' => Carbon::now()->subHours($reduce)->toDateString(),
+                'timestamp' => Carbon::now()->subHours($reduce)->toDateTimeString(),
                 'name' => $faker->name,
                 'narrations' => $faker->randomElement(['bills', 'hangout', 'fees']),
                 'type' => $faker->randomElement(['credit', 'debit']),
